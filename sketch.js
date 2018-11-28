@@ -2,7 +2,6 @@ var doors = [];
 var numDoors = 3;
 var state = 0;
 var winner;
-var touchInProgress = false;
 var winCount = 0;
 var gameCount = 0;
 
@@ -36,7 +35,6 @@ function draw() {
 }
 
 function touchEnded() {
-  touchInProgress = true;
   if(state == 0) {
     for(var i in doors) {
       if(doors[i].select(mouseX, mouseY)) {
