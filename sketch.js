@@ -35,52 +35,46 @@ function draw() {
   text(headText, width/2, height/16);
 }
 
-function touchStarted() {
-  if(!touchInProgress) {
-    touchInProgress = true;
-    if(state == 0) {
-      for(var i in doors) {
-        if(doors[i].select(mouseX, mouseY)) {
-          doors[i].sel = true;
-          var d = [];
-          for(var j in doors) {
-            if(!(doors[j].sel || doors[j].win)) {
-              d.push(j);
-            }
-          }
-          var reveal = floor(random(0, d.length));
-          doors[d[reveal]].open = true;
-          state = 1;
-        }
-      }
-    } else if(state == 1) {
-      var doorIndex = -1;
-      for(var i in doors) {
-        if(doors[i].select(mouseX, mouseY)) {
-          doorIndex = i;
-        }
-      }
-      if(doorIndex != -1) {
-        for(var i in doors) {
-          doors[i].sel = false;
-          if(doors[i].select(mouseX, mouseY)) {
-            doors[i].open = true;
-            doors[i].sel = true;
-            if(doors[i].win) {
-              winCount++;
-            }
-          }
-        }
-        state = 2;
-      }
-    } else if(state == 2) {
-      start();
-    }
-  }
-}
-
 function touchEnded() {
-  touchInProgress = false;
+  touchInProgress = true;
+  if(state == 0) {
+    for(var i in doors) {
+      if(doors[i].select(mouseX, mouseY)) {
+        doors[i].sel = true;
+        var d = [];
+        for(var j in doors) {
+          if(!(doors[j].sel || doors[j].win)) {
+            d.push(j);
+          }
+        }
+        var reveal = floor(random(0, d.length));
+        doors[d[reveal]].open = true;
+        state = 1;
+      }
+    }
+  } else if(state == 1) {
+    var doorIndex = -1;
+    for(var i in doors) {
+      if(doors[i].select(mouseX, mouseY)) {
+        doorIndex = i;
+      }
+    }
+    if(doorIndex != -1) {
+      for(var i in doors) {
+        doors[i].sel = false;
+        if(doors[i].select(mouseX, mouseY)) {
+          doors[i].open = true;
+          doors[i].sel = true;
+          if(doors[i].win) {
+            winCount++;
+          }
+        }
+      }
+      state = 2;
+    }
+  } else if(state == 2) {
+    start();
+  }
 }
 
 function start() {
