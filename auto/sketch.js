@@ -23,7 +23,7 @@ function draw() {
   textSize(width/8.25);
   textAlign(CENTER, CENTER);
   text("Staying", width/4, height/3);
-  text("Swaping", width*3/4, height/3);
+  text("Swapping", width*3/4, height/3);
   text(stay, width/4, height*2/3);
   text(swap, width*3/4, height*2/3);
   textSize(width/50);
